@@ -1,14 +1,2 @@
-<html>
-    <head>
-        <title>Mi Web</title>
-    </head>
-    <body>
-        @section('menu')
-            Contenido del menu
-        @show
+@extends('dopetrope.master')
 
-        <div class="container">
-            @yield('content')
-        </div>
-    </body>
-</html>

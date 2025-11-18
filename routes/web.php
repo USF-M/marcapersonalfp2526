@@ -6,17 +6,9 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/users', function () {
-    return view('users.usersLista', ['users' => [
-        ['id' => 1, 'name' => 'Ana'],
-        ['id' => 2, 'name' => 'Luis'],
-        ['id' => 3, 'name' => 'María'],
-    ]]);
-});
-
 // ----------------------------------------
 Route::get('login', function () {
-    return "Login usuario";
+    return view('auth.login');
 });
 Route::get('logout', function () {
     return "Logout usuario";
@@ -26,19 +18,19 @@ Route::get('logout', function () {
 // ----------------------------------------
 Route::prefix('proyectos')->group(function () {
     Route::get('/', function () {
-        return 'Listado proyectos';
+        return view('proyectos.index');
     });
 
     Route::get('create', function () {
-        return 'Añadir proyecto';
+        return view('proyectos.create');
     });
 
     Route::get('/show/{id}', function ($id) {
-        return 'Vista detalle proyecto ' . $id;
+        return view('proyectos.show', array('id'=>$id));
     }) -> where('id', '[0-9]+');
 
     Route::get('/edit/{id}', function ($id) {
-        return 'Modificar proyecto ' . $id;
+        return view('proyectos.edit', array('id'=>$id));
     }) -> where('id', '[0-9]+');
 });
 
