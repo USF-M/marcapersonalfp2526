@@ -5,9 +5,12 @@ namespace Database\Seeders;
 use App\Models\Proyecto;
 use App\Models\User;
 use Database\Seeders\FamiliasProfesionalesTableSeeder;
+use Database\Seeders\CiclosTableSeeder;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Eloquent\Model;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,16 +27,19 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]); */
+        Model::unguard();
+        Schema::disableForeignKeyConstraints();
 
         self::seedProyectos();
         $this->command->info('Tabla catálogo inicializada con datos!');
         $this->call(FamiliasProfesionalesTableSeeder::class);
+        $this->call(CiclosTableSeeder::class);
     }
 
-    private function seedProyectos():void
+    private function seedProyectos(): void
     {
         Proyecto::truncate();
-        foreach( self::$arrayProyectos as $proyecto ) {
+        foreach (self::$arrayProyectos as $proyecto) {
             $p = new Proyecto;
             $p->docente_id = $proyecto['docente_id'];
             $p->nombre = $proyecto['nombre'];
