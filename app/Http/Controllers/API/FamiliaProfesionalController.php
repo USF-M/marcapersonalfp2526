@@ -16,7 +16,8 @@ class FamiliaProfesionalController extends Controller
     {
         return FamiliaProfesionalResource::collection(
             FamiliaProfesional::orderBy($request->sort ?? 'id', $request->order ?? 'asc')
-            ->paginate($request->per_page));
+                ->paginate($request->per_page)
+        );
     }
 
     /**
@@ -32,7 +33,7 @@ class FamiliaProfesionalController extends Controller
      */
     public function show(FamiliaProfesional $familiaProfesional)
     {
-
+        return new FamiliaProfesionalResource($familiaProfesional);
     }
 
     /**
